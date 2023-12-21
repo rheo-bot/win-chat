@@ -2,18 +2,20 @@ import win32gui
 import win32api
 import win32con
 
+
 def show_subtitle(message, duration):
     hwnd = win32gui.GetDesktopWindow()
     hdc = win32gui.GetDC(hwnd)
 
     # Get the screen dimensions
-    screen_width, screen_height = win32api.GetSystemMetrics(win32con.SM_CXSCREEN), win32api.GetSystemMetrics(win32con.SM_CYSCREEN)
+    screen_width, screen_height = win32api.GetSystemMetrics(
+        win32con.SM_CXSCREEN), win32api.GetSystemMetrics(win32con.SM_CYSCREEN)
 
     # Calculate the position for the subtitle
     subtitle_x = screen_width // 2
     subtitle_y = screen_height - 50
 
-     # Set the font properties
+    # Set the font properties
     font = win32gui.LOGFONT()
     font.lfHeight = 36
     font.lfWeight = win32con.FW_BOLD
@@ -31,7 +33,7 @@ def show_subtitle(message, duration):
     # Draw the subtitle text
     win32gui.DrawText(hdc, message, -1, (subtitle_x, subtitle_y, 0, 0),
                       win32con.DT_LEFT | win32con.DT_NOCLIP | win32con.DT_SINGLELINE)
-    
+
     # Update the display
     win32gui.UpdateWindow(hwnd)
 
@@ -41,4 +43,6 @@ def show_subtitle(message, duration):
 
 
 # Usage example
-show_subtitle("Hello, World!", 20)  # Display "Hello, World!" as a subtitle for 5 seconds
+# Display "Hello, World!" as a subtitle for 5 seconds
+show_subtitle("Hello, World!", 5)
+show_subtitle("Bye Bye!", 2)
